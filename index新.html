@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link href="" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet" />
+    <script src="js/vue.js"></script>
+
+    <style type="text/css">
+      body {
+        margin: 0;
+        background-color: #000;
+      }
+      #app {
+        position: relative;
+        display: block;
+        width: 1280px;
+        height: 800px;
+        background-color: #121212;
+      }
+      .menu {
+        position: relative;
+        display: block;
+        width: 1280px;
+        height: 54px;
+        background-color: #000;
+      }
+      .title_group {
+        position: absolute;
+        display: inline-block;
+        left: 87px;
+        top: 8px;
+        width: 131px;
+        height: 38px;
+      }
+      .title {
+        display: inline;
+        font-size: 32px;
+        font-style: italic;
+        font-weight: bold;
+        font-family: 'PT Sans', sans-serif;
+        white-space: nowrap;
+      }
+      .one {
+        color: #00ffce;
+      }
+      .two {
+        color: #a617ff;
+      }
+      .three {
+        position: absolute;
+        display: inline-block;
+        left: 600px;
+        top: 8px;
+        color: white;
+      }
+      .icon_one {
+        position: absolute;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        left: 913px;
+        top: 15px;
+        color: white;
+      }
+      .icon_word_one {
+        position: absolute;
+        display: block;
+        width: 42px;
+        height: 18px;
+        font-size: 16px;
+        font-style: italic;
+        font-weight: bold;
+        font-family: 'PT Sans', sans-serif;
+        left: 941px;
+        top: 18px;
+        color: white;
+        cursor: pointer;
+      }
+      .icon_two {
+        position: absolute;
+        display: block;
+        width: 24px;
+        height: 24px;
+        left: 1008px;
+        top: 15px;
+        color: white;
+      }
+      .icon_word_two {
+        position: absolute;
+        display: block;
+        width: 42px;
+        height: 18px;
+        font-size: 16px;
+        font-style: italic;
+        font-weight: bold;
+        font-family: 'PT Sans', sans-serif;
+        left: 1036px;
+        top: 18px;
+        color: white;
+        cursor: pointer;
+      }
+      .icon_three {
+        position: absolute;
+        display: block;
+        width: 24px;
+        height: 24px;
+        left: 1103px;
+        top: 15px;
+        color: white;
+      }
+      .icon_word_three {
+        position: absolute;
+        display: block;
+        width: 42px;
+        height: 18px;
+        font-size: 16px;
+        font-style: italic;
+        font-weight: bold;
+        font-family: 'PT Sans', sans-serif;
+        left: 1131px;
+        top: 18px;
+        color: white;
+        cursor: pointer;
+      }
+      .card_place_group {
+        position: absolute;
+        display: block;
+        width: 1196px;
+        height: 173px;
+        left: 70px;
+        top: 102px;
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+
+      .card_top_place {
+        position: relative;
+        display: inline-block;
+
+        width: 112px;
+        height: 173px;
+        background-color: rgba(255, 255, 255, 0.08);
+        border-radius: 4px;
+        margin: 0px 0px 0px 30px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      .card_place_sense {
+        position: absolute;
+        display: block;
+        width: 1196px;
+        height: 173px;
+        left: 70px;
+        top: 300px;
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+
+      .card_sense {
+        position: relative;
+        display: inline-block;
+        width: 112px;
+        height: 450px;
+        background-color: rgba(255, 255, 255, 0.08);
+        border-radius: 4px;
+        margin: 0px 0px 0px 30px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      .icon_small {
+        position: relative;
+        display: inline;
+        margin: auto;
+        line-height: 173px;
+        opacity: 0.08;
+      }
+      .background_1 {
+        position: relative;
+        display: inline-block;
+        background-image: url(' img/spade-24px.svg ');
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .background_2 {
+        position: relative;
+        display: inline-block;
+        background-image: url(' img/heart-24px.svg ');
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .background_3 {
+        position: relative;
+        display: inline-block;
+        background-image: url(' img/club-24px.svg ');
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .background_4 {
+        position: relative;
+        display: inline-block;
+        background-image: url(' img/diamond-24px.svg ');
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .card_style {
+        position: absolute;
+        display: inline-block;
+        width: 112px;
+        height: 173px;
+        left: 30px;
+        top: 250px;
+        background-color: rgb(253, 246, 246);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
+      .card_group {
+        position: absolute;
+        display: block;
+        left: 0px;
+        top: 0px;
+      }
+    </style>
+    <script type="text/javascript">
+      (function() {
+        window.onload = function() {
+          var app = new Vue({
+            el: '#app',
+            data: {
+              type: [
+                { icon: 'spade', color: 'black' },
+                { icon: 'heart', color: 'red' },
+                { icon: 'diamond', color: 'red' },
+                { icon: 'club', color: 'black' },
+              ],
+              senseList: [
+                { sense: 'sense01', list: [] },
+                { sense: 'sense02', list: [] },
+                { sense: 'sense03', list: [] },
+                { sense: 'sense04', list: [] },
+                { sense: 'sense05', list: [] },
+                { sense: 'sense06', list: [] },
+                { sense: 'sense07', list: [] },
+                { sense: 'sense08', list: [] },
+                { sense: 'sense09', list: [] },
+                { sense: 'sense10', list: [] },
+                { sense: 'sense11', list: [] },
+                { sense: 'sense12', list: [] },
+                { sense: 'sense13', list: [] },
+                { sense: 'sense14', list: [] },
+                { sense: 'sense15', list: [] },
+                { sense: 'sense16', list: [] },
+              ],
+
+              cards: [],
+              cardsMap: [],
+              currentDrag: null,
+              dragIndex: -1,
+              down: false,
+              move: false,
+              elX: '',
+              elY: '',
+              pageX: '',
+              pageY: '',
+              moveX: '',
+              moveY: '',
+              time: 0,
+              totalTime: 0,
+              minute: '',
+              second: '',
+              play: true,
+              go: '',
+            },
+            methods: {
+              cardStyle: function(model, index) {
+                return {
+                  backgroundImage:
+                    'url(' +
+                    'img/' +
+                    this.type[model.type].icon +
+                    '/card-' +
+                    this.type[model.type].icon +
+                    '-' +
+                    (model.number + 1) +
+                    '.svg)',
+                  left: model.x + 'px',
+                  top: model.y + 'px',
+                  zIndex: model.z,
+                };
+              },
+
+              mouseDown: function(e, index) {
+                if (this.play && !this.down) {
+                  this.currentDrag = e.currentTarget;
+                  this.dragIndex = index;
+
+                  if (
+                    this.cards[index].z ==
+                    this.senseList[this.cards[this.dragIndex].sense].list.length - 1
+                  ) {
+                    this.down = true;
+                    this.elX = this.currentDrag.offsetLeft;
+                    this.elY = this.currentDrag.offsetTop;
+                    this.pageX = e.pageX;
+                    this.pageY = e.pageY;
+
+                    window.addEventListener('mouseup', this.mouseUp);
+                    window.addEventListener('mousemove', this.mouseMove);
+                  }
+                }
+              },
+              mouseMove: function(e) {
+                if (this.play && this.down) {
+                  this.move = true;
+
+                  this.moveX = e.pageX - this.pageX;
+                  this.moveY = e.pageY - this.pageY;
+
+                  this.cards[this.dragIndex].x = this.elX + this.moveX;
+                  this.cards[this.dragIndex].y = this.elY + this.moveY;
+                  this.cards[this.dragIndex].z = 999;
+                }
+              },
+              mouseUp: function(e) {
+                if (this.play && this.down) {
+                  this.move = false;
+                  this.down = false;
+                  window.removeEventListener('mouseup', this.mouseUp);
+                  window.removeEventListener('mousemove', this.mouseMove);
+
+                  var boxRect = {
+                    x: this.currentDrag.offsetLeft,
+                    y: this.currentDrag.offsetTop,
+                    width: this.currentDrag.offsetWidth,
+                    height: this.currentDrag.offsetHeight,
+                  };
+                  //04:查找卡片和哪一sense碰撞,index為有碰撞的感應區索引//
+                  var that = this;
+                  var index = this.senseList.findIndex(function(data) {
+                    var sense = that.$refs[data.sense];
+                    /*  console.log(sense); */
+                    var senseRect = {
+                      x: sense.parentElement.offsetLeft + sense.offsetLeft,
+                      y: sense.parentElement.offsetTop + sense.offsetTop,
+                      width: sense.offsetWidth,
+                      height: sense.offsetHeight,
+                    };
+                    return that.collisionDetected(boxRect, senseRect);
+                  });
+
+                  /*  console.log(
+                            this.cards[this.senseList[index].list[that.senseList[index].list.length - 1]]
+                              .number + 1,
+                          );
+                          console.log(this.cards[this.dragIndex].number + 1); */
+                  /*console.log(this.type[this.cards[this.dragIndex].type].color);
+                          console.log(
+                            this.type[
+                              this.cards[
+                                this.senseList[index].list[that.senseList[index].list.length - 1]
+                              ].type
+                            ].color,
+                          ); */
+                  if (16 > index && index > 11 && this.senseList[index].list.length == 0) {
+                    console.log('1');
+                    var that = this;
+                    var oldIndex = this.cards[this.dragIndex].sense;
+                    var spliceIndex = this.senseList[oldIndex].list.findIndex(function(e) {
+                      return e == that.dragIndex;
+                    });
+                    var spliceArray = this.senseList[oldIndex].list.splice(spliceIndex, 1);
+                    /* console.log(spliceArray); */
+
+                    spliceArray.forEach(function(el) {
+                      that.senseList[index].list.push(el);
+                    });
+
+                    this.senseListUpdate(oldIndex);
+                    this.senseListUpdate(index);
+
+                    this.cards[this.dragIndex].sense = index;
+                    /* console.log(this.senseList[oldIndex].list);
+                            console.log(that.senseList[index].list); */
+                  } /*index=8*/ else if (
+                    index == 8 &&
+                    this.senseList[index].list.length == 0 &&
+                    this.cards[this.dragIndex].number == 0 &&
+                    this.type[this.cards[this.dragIndex].type].icon == 'spade'
+                  ) {
+                    var that = this;
+                    var oldIndex = this.cards[this.dragIndex].sense;
+                    var spliceIndex = this.senseList[oldIndex].list.findIndex(function(e) {
+                      return e == that.dragIndex;
+                    });
+                    var spliceArray = this.senseList[oldIndex].list.splice(spliceIndex, 1);
+
+                    this.senseList[index].list.push(spliceArray[0]);
+
+                    this.senseListUpdate(oldIndex);
+                    this.senseListUpdate(index);
+
+                    this.cards[this.dragIndex].sense = index;
+                  } else if (
+                    index == 8 &&
+                    this.senseList[index].list.length !== 0 &&
+                    this.type[this.cards[this.dragIndex].type].icon == 'spade' &&
+                    this.cards[this.dragIndex].number + 1 ==
+                      this.cards[this.senseList[index].list[that.senseList[index].list.length - 1]]
+                        .number +
+                        1 +
+                        1
+                  ) {
+                    var that = this;
+                    var oldIndex = this.cards[this.dragIndex].sense;
+                    var spliceIndex = this.senseList[oldIndex].list.findIndex(function(e) {
+                      return e == that.dragIndex;
+                    });
+                    var spliceArray = this.senseList[oldIndex].list.splice(spliceIndex, 1);
+
+                    this.senseList[index].list.push(spliceArray[0]);
+
+                    this.senseListUpdate(oldIndex);
+                    this.senseListUpdate02(index);
+
+                    this.cards[this.dragIndex].sense = index;
+                  } /*index==9*/ else if (
+                    index == 9 &&
+                    this.senseList[index].list.length == 0 &&
+                    this.cards[this.dragIndex].number == 0 &&
+                    this.type[this.cards[this.dragIndex].type].icon == 'heart'
+                  ) {
+                    console.log(this.senseList[index].list.length);
+                    console.log(this.cards[this.dragIndex].number);
+                    var that = this;
+                    var oldIndex = this.cards[this.dragIndex].sense;
+                    var spliceIndex = this.senseList[oldIndex].list.findIndex(function(e) {
+                      return e == that.dragIndex;
+                    });
+                    var spliceArray = this.senseList[oldIndex].list.splice(spliceIndex, 1);
+
+                    this.senseList[index].list.push(spliceArray[0]);
+
+                    this.senseListUpdate(oldIndex);
+                    this.senseListUpdate(index);
+
+                    this.cards[this.dragIndex].sense = index;
+                  } else if (
+                    index == 9 &&
+                    this.senseList[index].list.length !== 0 &&
+                    this.type[this.cards[this.dragIndex].type].icon == 'heart' &&
+                    this.cards[this.dragIndex].number + 1 ==
+                      this.cards[this.senseList[index].list[that.senseList[index].list.length - 1]]
+                        .number +
+                        1 +
+                        1
+                  ) {
+                    var that = this;
+                    var oldIndex = this.cards[this.dragIndex].sense;
+                    var spliceIndex = this.senseList[oldIndex].list.findIndex(function(e) {
+                      return e == that.dragIndex;
+                    });
+                    var spliceArray = this.senseList[oldIndex].list.splice(spliceIndex, 1);
+
+                    this.senseList[index].list.push(spliceArray[0]);
+
+                    this.senseListUpdate(oldIndex);
+                    this.senseListUpdate02(index);
+
+                    this.cards[this.dragIndex].sense = index;
+                  } /*index=10*/ else if (
+                    index == 10 &&
+                    this.senseList[index].list.length == 0 &&
+                    this.cards[this.dragIndex].number == 0 &&
+                    this.type[this.cards[this.dragIndex].type].icon == 'club'
+                  ) {
+                    var that = this;
+                    var oldIndex = this.cards[this.dragIndex].sense;
+                    var spliceIndex = this.senseList[oldIndex].list.findIndex(function(e) {
+                      return e == that.dragIndex;
+                    });
+                    var spliceArray = this.senseList[oldIndex].list.splice(spliceIndex, 1);
+
+                    this.senseList[index].list.push(spliceArray[0]);
+
+                    this.senseListUpdate(oldIndex);
+                    this.senseListUpdate(index);
+
+                    this.cards[this.dragIndex].sense = index;
+                  } else if (
+                    index == 10 &&
+                    this.senseList[index].list.length !== 0 &&
+                    this.type[this.cards[this.dragIndex].type].icon == 'club' &&
+                    this.cards[this.dragIndex].number + 1 ==
+                      this.cards[this.senseList[index].list[that.senseList[index].list.length - 1]]
+                        .number +
+                        1 +
+                        1
+                  ) {
+                    var that = this;
+                    var oldIndex = this.cards[this.dragIndex].sense;
+                    var spliceIndex = this.senseList[oldIndex].list.findIndex(function(e) {
+                      return e == that.dragIndex;
+                    });
+                    var spliceArray = this.senseList[oldIndex].list.splice(spliceIndex, 1);
+
+                    this.senseList[index].list.push(spliceArray[0]);
+
+                    this.senseListUpdate(oldIndex);
+                    this.senseListUpdate02(index);
+
+                    this.cards[this.dragIndex].sense = index;
+                  } /*index=11*/ else if (
+                    index == 11 &&
+                    this.senseList[index].list.length == 0 &&
+                    this.cards[this.dragIndex].number == 0 &&
+                    this.type[this.cards[this.dragIndex].type].icon == 'diamond'
+                  ) {
+                    var that = this;
+                    var oldIndex = this.cards[this.dragIndex].sense;
+                    var spliceIndex = this.senseList[oldIndex].list.findIndex(function(e) {
+                      return e == that.dragIndex;
+                    });
+                    var spliceArray = this.senseList[oldIndex].list.splice(spliceIndex, 1);
+
+                    this.senseList[index].list.push(spliceArray[0]);
+
+                    this.senseListUpdate(oldIndex);
+                    this.senseListUpdate(index);
+
+                    this.cards[this.dragIndex].sense = index;
+                  } else if (
+                    index == 11 &&
+                    this.senseList[index].list.length !== 0 &&
+                    this.type[this.cards[this.dragIndex].type].icon == 'diamond' &&
+                    this.cards[this.dragIndex].number + 1 ==
+                      this.cards[this.senseList[index].list[that.senseList[index].list.length - 1]]
+                        .number +
+                        1 +
+                        1
+                  ) {
+                    var that = this;
+                    var oldIndex = this.cards[this.dragIndex].sense;
+                    var spliceIndex = this.senseList[oldIndex].list.findIndex(function(e) {
+                      return e == that.dragIndex;
+                    });
+                    var spliceArray = this.senseList[oldIndex].list.splice(spliceIndex, 1);
+
+                    this.senseList[index].list.push(spliceArray[0]);
+
+                    this.senseListUpdate(oldIndex);
+                    this.senseListUpdate02(index);
+
+                    this.cards[this.dragIndex].sense = index;
+                  } else if (
+                    -1 < index &&
+                    index < 8 &&
+                    this.cards[this.dragIndex].number + 1 + 1 ==
+                      this.cards[this.senseList[index].list[that.senseList[index].list.length - 1]]
+                        .number +
+                        1 &&
+                    this.type[this.cards[this.dragIndex].type].color !==
+                      this.type[
+                        this.cards[
+                          this.senseList[index].list[this.senseList[index].list.length - 1]
+                        ].type
+                      ].color
+                  ) {
+                    //移動的牌舊的感應區的sense index
+                    var oldIndex = this.cards[this.dragIndex].sense;
+                    var spliceIndex = this.senseList[oldIndex].list.findIndex(function(e) {
+                      return e == that.dragIndex;
+                    });
+                    var spliceArray = this.senseList[oldIndex].list.splice(spliceIndex, 1);
+                    /* console.log(spliceArray); */
+
+                    spliceArray.forEach(function(el) {
+                      that.senseList[index].list.push(el);
+                    });
+
+                    this.senseListUpdate(oldIndex);
+                    this.senseListUpdate(index);
+
+                    this.cards[this.dragIndex].sense = index;
+                    /* console.log(this.cards[this.dragIndex].sense); */
+                  } else {
+                    var oldIndex = this.cards[this.dragIndex].sense;
+                    this.senseListUpdate(oldIndex);
+                    this.cards[this.dragIndex].sense = oldIndex;
+                  }
+                }
+              },
+              collisionDetected: function(rect1, rect2) {
+                return (
+                  rect1.x < rect2.x + rect2.width &&
+                  rect1.x + rect1.width > rect2.x &&
+                  rect1.y < rect2.y + rect2.height &&
+                  rect1.height + rect1.y > rect2.y
+                );
+              },
+              senseListUpdate: function(index) {
+                var that = this;
+                var senseListItem = this.senseList[index];
+                var sense = this.$refs[senseListItem.sense];
+                senseListItem.list.forEach(function(number, index888) {
+                  that.cards[number].x = sense.parentElement.offsetLeft + sense.offsetLeft;
+                  that.cards[number].y =
+                    sense.parentElement.offsetTop + sense.offsetTop + index888 * 30;
+                  that.cards[number].z = index888;
+                });
+              },
+              senseListUpdate02: function(index) {
+                var that = this;
+                var senseListItem = this.senseList[index];
+                var sense = this.$refs[senseListItem.sense];
+                senseListItem.list.forEach(function(number, index888) {
+                  that.cards[number].x = sense.parentElement.offsetLeft + sense.offsetLeft;
+                  that.cards[number].y = sense.parentElement.offsetTop + sense.offsetTop;
+                  that.cards[number].z = index888;
+                });
+              },
+
+              count: function() {
+                this.time++;
+                this.totalTime = this.time;
+                this.minute = Math.floor(this.totalTime / 60);
+                if (this.minute < 10) {
+                  this.minute = '0' + this.minute;
+                }
+                this.second = this.totalTime - this.minute * 60;
+                if (this.second < 10) {
+                  this.second = '0' + this.second;
+                }
+              },
+              stop: function() {
+                this.play = !this.play;
+                if (this.play == false) {
+                  clearInterval(this.go);
+                  console.log(this.play);
+                } else {
+                  this.go = setInterval(this.count, 1000);
+                  console.log(this.play);
+                }
+              },
+              renew: function() {
+                for (var i = 0; i < this.senseList.length; i++) {
+                  this.senseList[i].list.splice(0, this.senseList.length);
+                }
+                var a = [];
+                for (var i = 0; i < 52; i++) {
+                  a.push(i);
+                }
+
+                for (var i = 0; i < 52; i++) {
+                  var index = Math.floor(Math.random() * (52 - i));
+                  var b = a.splice(index, 1);
+                  //b取得的是刪除掉的index
+                  a.push(b[0]);
+                }
+                console.log(a);
+                for (var i = 0; i < 52; i++) {
+                  this.cards[a[i]].sense = i % 8;
+                  this.senseList[i % 8].list.push(a[i]);
+                }
+                var that = this;
+                this.senseList.forEach(function(senseListItem, index) {
+                  that.senseListUpdate(index);
+                });
+                this.time = 0;
+                this.totalTime = 0;
+                this.minute = Math.floor(this.totalTime / 60);
+                if (this.minute < 10) {
+                  this.minute = '0' + this.minute;
+                }
+                this.second = this.totalTime - this.minute * 60;
+                if (this.second < 10) {
+                  this.second = '0' + this.second;
+                }
+              },
+            },
+            mounted: function() {
+              for (var type_key in this.type) {
+                for (var i = 0; i < 13; i++) {
+                  this.cards.push({
+                    type: type_key,
+                    number: i,
+                    x: 0,
+                    y: 0,
+                    z: 0,
+                    sense: -1,
+                  });
+                }
+              }
+              console.log(this.cards);
+
+              var a = [];
+              for (var i = 0; i < 52; i++) {
+                a.push(i);
+              }
+
+              for (var i = 0; i < 52; i++) {
+                var index = Math.floor(Math.random() * (52 - i));
+                var b = a.splice(index, 1);
+                //b取得的是刪除掉的index
+                a.push(b[0]);
+              }
+              console.log(a);
+              for (var i = 0; i < 52; i++) {
+                this.cards[a[i]].sense = i % 8;
+                this.senseList[i % 8].list.push(a[i]);
+              }
+              var that = this;
+              this.senseList.forEach(function(senseListItem, index) {
+                that.senseListUpdate(index);
+              });
+              this.go = setInterval(this.count, 1000);
+            },
+          });
+        };
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="menu">
+        <div class="title_group">
+          <div class="title one">FREE</div>
+          <div class="title two">CELL</div>
+        </div>
+        <div class="title three">{{ minute }}:{{ second }}</div>
+        <img class="icon_one" src="img/ic_undo_24px.svg" />
+        <div class="icon_word_one">back</div>
+        <img class="icon_two" src="img/ic_pause_24px.svg" />
+        <div class="icon_word_two" @click="stop">stop</div>
+        <img class="icon_three" src="img/ic_loop_24px.svg" />
+        <div class="icon_word_three" @click="renew">renew</div>
+      </div>
+      <div class="card_place_group">
+        <div id="sense09" ref="sense09" class="card_top_place background_1"></div>
+        <div id="sense10" ref="sense10" class="card_top_place background_2"></div>
+        <div id="sense11" ref="sense11" class="card_top_place background_3"></div>
+        <div id="sense12" ref="sense12" class="card_top_place background_4"></div>
+        <div id="sense13" ref="sense13" class="card_top_place"></div>
+        <div id="sense14" ref="sense14" class="card_top_place"></div>
+        <div id="sense15" ref="sense15" class="card_top_place"></div>
+        <div id="sense16" ref="sense16" class="card_top_place"></div>
+      </div>
+
+      <div class="card_place_sense">
+        <div id="sense01" ref="sense01" class="card_sense"></div>
+        <div id="sense02" ref="sense02" class="card_sense"></div>
+        <div id="sense03" ref="sense03" class="card_sense"></div>
+        <div id="sense04" ref="sense04" class="card_sense"></div>
+        <div id="sense05" ref="sense05" class="card_sense"></div>
+        <div id="sense06" ref="sense06" class="card_sense"></div>
+        <div id="sense07" ref="sense07" class="card_sense"></div>
+        <div id="sense08" ref="sense08" class="card_sense"></div>
+      </div>
+      <div class="card_group">
+        <div
+          class="card_style"
+          v-for="(model,index) in cards"
+          :style="cardStyle(model)"
+          @mousedown="function(e){mouseDown(e,index);}"
+        ></div>
+      </div>
+    </div>
+  </body>
+</html>
